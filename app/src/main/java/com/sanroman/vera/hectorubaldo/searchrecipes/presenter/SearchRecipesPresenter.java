@@ -15,11 +15,15 @@ public class SearchRecipesPresenter implements SearchContract.Presenter{
     }
     @Override
     public void showRecipes(String data) {
-
+        if (view != null) {
+            view.showRecipes(data);
+        }
     }
 
     @Override
     public void searchRecipes(String data) {
-
+        if (view != null) {
+            model.searchRecipes(data);
+        }
     }
 }

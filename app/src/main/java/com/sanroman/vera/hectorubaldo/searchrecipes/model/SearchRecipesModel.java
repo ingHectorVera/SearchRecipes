@@ -14,6 +14,6 @@ public class SearchRecipesModel implements SearchContract.Model{
 
     @Override
     public void searchRecipes(String data) {
-
+        presenter.showRecipes(data);
     }
 }

@@ -5,14 +5,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.sanroman.vera.hectorubaldo.searchrecipes.R;
 import com.sanroman.vera.hectorubaldo.searchrecipes.contract.SearchContract;
+import com.sanroman.vera.hectorubaldo.searchrecipes.presenter.SearchRecipesPresenter;
 
 public class SearchView extends AppCompatActivity implements SearchContract.View, View.OnClickListener {
 
     private EditText eSearchRecipes;
     private Button bSearchRecipes;
+    private TextView tSearchResult;
+    private SearchContract.Presenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,16 +27,28 @@ public class SearchView extends AppCompatActivity implements SearchContract.View
     }
 
     @Override
-    public void showRecipes() {
-
+    public void showRecipes(String data) {
+        String temp = tSearchResult.getText().toString();
+        tSearchResult.setText(temp +" "+data);
     }
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bSearchRecipes:
+                String recipe = eSearchRecipes.getText().toString();
+                presenter.searchRecipes(recipe);
+                break;
+        }
 
     }
 
     public void setUI() {
+        eSearchRecipes = (EditText) findViewById(R.id.eSearchRecipes);
+        tSearchResult = (TextView) findViewById(R.id.tSearchResult);
+        bSearchRecipes = (Button) findViewById(R.id.bSearchRecipes);
+        bSearchRecipes.setOnClickListener(this);
 
+        presenter = new SearchRecipesPresenter(this);
     }
 }
