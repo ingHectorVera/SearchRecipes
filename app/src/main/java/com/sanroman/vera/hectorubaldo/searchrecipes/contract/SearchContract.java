@@ -9,10 +9,10 @@ public interface SearchContract {
 
     interface Presenter {
         void showRecipes(String data);
-        void searchRecipes();
+        void searchRecipes(String data);
     }
 
     interface  Model {
-        void searchRecipes();
+        void searchRecipes(String data);
     }
 }
