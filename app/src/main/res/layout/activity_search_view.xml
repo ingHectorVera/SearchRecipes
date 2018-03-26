@@ -18,7 +18,7 @@
             android:text="Recipe: "/>
         <EditText
             android:id="@+id/eSearchRecipes"
-            android:layout_width="245dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/bSearchRecipes"

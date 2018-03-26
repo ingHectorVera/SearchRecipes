@@ -33,6 +33,11 @@ public class SearchView extends AppCompatActivity implements SearchContract.View
     }
 
     @Override
+    public void showError(String error) {
+
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bSearchRecipes:
