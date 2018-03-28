@@ -1,23 +1,25 @@
 package com.sanroman.vera.hectorubaldo.searchrecipes.data.model;
 
+import java.util.List;
+
 public class Hits {
 
     private String q;
     private int to, from, count;
-    private String [][] params;
+    //private String [] params;
     private boolean more;
-    private Hit[] hits;
+    private List<Hit> hits;
 
     public Hits() {
 
     }
 
-    public Hits(String q, int to, int from, int count, String[][] params, boolean more, Hit[] hits) {
+    public Hits(String q, int to, int from, int count, boolean more, List<Hit> hits) {
         this.q = q;
         this.to = to;
         this.from = from;
         this.count = count;
-        this.params = params;
+        //this.params = params;
         this.more = more;
         this.hits = hits;
     }
@@ -55,14 +57,6 @@ public class Hits {
         this.count = count;
     }
 
-    public String[][] getParams() {
-        return params;
-    }
-
-    public void setParams(String[][] params) {
-        this.params = params;
-    }
-
     public boolean isMore() {
         return more;
     }
@@ -71,11 +65,11 @@ public class Hits {
         this.more = more;
     }
 
-    public Hit[] getHits() {
+    public List<Hit> getHits() {
         return hits;
     }
 
-    public void setHits(Hit[] hits) {
+    public void setHits(List<Hit> hits) {
         this.hits = hits;
     }
 }

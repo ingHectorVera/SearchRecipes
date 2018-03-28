@@ -1,16 +1,16 @@
 package com.sanroman.vera.hectorubaldo.searchrecipes.data.model;
 
+import java.util.List;
+
 public class Recipe {
 
     private String uri, label, image, source, url;
     private int yield;
     private float calories, totalWeight;
-    private Ingredient[] ingredients;
-    private NutrientInfo[] totalNutrients, totalDaily;
+    private List<Ingredient> ingredients;
 
     public Recipe(String uri, String label, String image, String source, String url, int yield,
-                  float calories, float totalWeight, Ingredient[] ingredients, NutrientInfo[] totalNutrients,
-                  NutrientInfo[] totalDaily) {
+                  float calories, float totalWeight, List<Ingredient> ingredients) {
         this.uri = uri;
         this.label = label;
         this.image = image;
@@ -20,8 +20,6 @@ public class Recipe {
         this.calories = calories;
         this.totalWeight = totalWeight;
         this.ingredients = ingredients;
-        this.totalNutrients = totalNutrients;
-        this.totalDaily = totalDaily;
     }
 
 
@@ -89,27 +87,12 @@ public class Recipe {
         this.totalWeight = totalWeight;
     }
 
-    public Ingredient[] getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(Ingredient[] ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
-    public NutrientInfo[] getTotalNutrients() {
-        return totalNutrients;
-    }
-
-    public void setTotalNutrients(NutrientInfo[] totalNutrients) {
-        this.totalNutrients = totalNutrients;
-    }
-
-    public NutrientInfo[] getTotalDaily() {
-        return totalDaily;
-    }
-
-    public void setTotalDaily(NutrientInfo[] totalDaily) {
-        this.totalDaily = totalDaily;
-    }
 }

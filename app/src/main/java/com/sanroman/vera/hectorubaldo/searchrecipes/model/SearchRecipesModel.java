@@ -2,6 +2,7 @@ package com.sanroman.vera.hectorubaldo.searchrecipes.model;
 
 
 import com.sanroman.vera.hectorubaldo.searchrecipes.contract.SearchContract;
+import com.sanroman.vera.hectorubaldo.searchrecipes.data.model.SearchRecipeAPIModel;
 import com.sanroman.vera.hectorubaldo.searchrecipes.presenter.SearchRecipesPresenter;
 
 public class SearchRecipesModel implements SearchContract.Model{
@@ -14,7 +15,7 @@ public class SearchRecipesModel implements SearchContract.Model{
 
     @Override
     public void searchRecipes(String data) {
-
+        SearchRecipeAPIModel.searchRecipeQueryCallable(data);
         presenter.showRecipes(data);
     }
 }

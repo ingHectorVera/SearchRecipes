@@ -1,25 +1,29 @@
 package com.sanroman.vera.hectorubaldo.searchrecipes.data.model;
 
-import com.sanroman.vera.hectorubaldo.searchrecipes.data.api.SearchRecipeFactory;
+import android.util.Log;
 
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import com.sanroman.vera.hectorubaldo.searchrecipes.data.api.SearchRecipeFactory;
+
+import java.util.List;
 import retrofit2.Response;
 
 public class SearchRecipeAPIModel {
 
     public static void searchRecipeQueryCallable(String query) {
 
-        SearchRecipeFactory.getInstance().getRecipes(query).enqueue(new Callback<List<Hits>>() {
+        SearchRecipeFactory.getInstance().getRecipes(query).enqueue(new Callback<Hits>() {
             @Override
-            public void onResponse(Call<List<Hits>> call, Response<List<Hits>> response) {
-
+            public void onResponse(Call<Hits> call, Response<Hits> response) {
+                Hits hits = response.body();
+                Log.d("DEBUG", "onResponse: "+ response.raw());
             }
 
             @Override
-            public void onFailure(Call<List<Hits>> call, Throwable t) {
+            public void onFailure(Call<Hits> call, Throwable t) {
+                Log.d("DEBUG", "onFailure: " + t.getMessage());
 
             }
         });
