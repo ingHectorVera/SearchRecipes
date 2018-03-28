@@ -24,4 +24,12 @@ public class Food {
     public void setLabel(String label) {
         this.label = label;
     }
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "uri='" + uri + '\'' +
+                ", label='" + label + '\'' +
+                '}';
+    }
 }

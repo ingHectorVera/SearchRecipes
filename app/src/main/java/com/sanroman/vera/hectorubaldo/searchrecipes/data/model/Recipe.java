@@ -95,4 +95,18 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "uri='" + uri + '\'' +
+                ", label='" + label + '\'' +
+                ", image='" + image + '\'' +
+                ", source='" + source + '\'' +
+                ", url='" + url + '\'' +
+                ", yield=" + yield +
+                ", calories=" + calories +
+                ", totalWeight=" + totalWeight +
+                ", ingredients=" + ingredients +
+                '}';
+    }
 }

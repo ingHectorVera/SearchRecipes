@@ -6,7 +6,6 @@ public class Hits {
 
     private String q;
     private int to, from, count;
-    //private String [] params;
     private boolean more;
     private List<Hit> hits;
 
@@ -71,5 +70,17 @@ public class Hits {
 
     public void setHits(List<Hit> hits) {
         this.hits = hits;
+    }
+
+    @Override
+    public String toString() {
+        return "Hits{" +
+                "q='" + q + '\'' +
+                ", to=" + to +
+                ", from=" + from +
+                ", count=" + count +
+                ", more=" + more +
+                ", hits=" + hits +
+                '}';
     }
 }

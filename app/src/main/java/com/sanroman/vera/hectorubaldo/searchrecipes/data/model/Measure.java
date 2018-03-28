@@ -24,4 +24,12 @@ public class Measure {
     public void setLabel(String label) {
         this.label = label;
     }
+
+    @Override
+    public String toString() {
+        return "Measure{" +
+                "uri='" + uri + '\'' +
+                ", label='" + label + '\'' +
+                '}';
+    }
 }

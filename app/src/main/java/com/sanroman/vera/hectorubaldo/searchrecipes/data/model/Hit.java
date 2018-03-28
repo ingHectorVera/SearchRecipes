@@ -34,4 +34,13 @@ public class Hit {
     public void setBought(boolean bought) {
         this.bought = bought;
     }
+
+    @Override
+    public String toString() {
+        return "Hit{" +
+                "recipe=" + recipe +
+                ", bookmarked=" + bookmarked +
+                ", bought=" + bought +
+                '}';
+    }
 }

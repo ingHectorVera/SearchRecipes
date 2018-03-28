@@ -43,4 +43,14 @@ public class NutrientInfo {
     public void setQuantity(float quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return "NutrientInfo{" +
+                "uri='" + uri + '\'' +
+                ", label='" + label + '\'' +
+                ", unit='" + unit + '\'' +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

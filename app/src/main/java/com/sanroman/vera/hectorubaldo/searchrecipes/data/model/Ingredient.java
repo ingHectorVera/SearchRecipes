@@ -56,4 +56,15 @@ public class Ingredient {
     public void setFood(Food food) {
         this.food = food;
     }
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "uri='" + uri + '\'' +
+                ", quantity=" + quantity +
+                ", measure=" + measure +
+                ", weight=" + weight +
+                ", food=" + food +
+                '}';
+    }
 }

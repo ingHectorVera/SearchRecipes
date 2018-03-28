@@ -19,6 +19,7 @@ public class SearchRecipeAPIModel {
             public void onResponse(Call<Hits> call, Response<Hits> response) {
                 Hits hits = response.body();
                 Log.d("DEBUG", "onResponse: "+ response.raw());
+                Log.d("DEBUG", "onResponse: " + hits.toString());
             }
 
             @Override
