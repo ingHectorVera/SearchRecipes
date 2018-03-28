@@ -29,4 +29,21 @@ public class SearchRecipeAPIModel {
             }
         });
     }
+
+    public static void searchRecipeFromToCallable(String query, int from, int to) {
+        SearchRecipeFactory.getInstance().getRecipesFromTo(query,from, to).enqueue(new Callback<Hits>() {
+            @Override
+            public void onResponse(Call<Hits> call, Response<Hits> response) {
+                Hits hits = response.body();
+                Log.d("DEBUG", "onResponse: "+ response.raw());
+                Log.d("DEBUG", "onResponse: " + hits.toString());
+
+            }
+
+            @Override
+            public void onFailure(Call<Hits> call, Throwable t) {
+                Log.d("DEBUG", "onFailure: " + t.getMessage());
+            }
+        });
+    }
 }

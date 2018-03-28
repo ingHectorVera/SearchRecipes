@@ -11,4 +11,8 @@ public interface SearchService {
 
     @GET ("/search?app_id="+ Constants.API_ID+"&app_key="+Constants.API_KEY)
     Call<Hits> getRecipes(@Query("q") String query);
+
+
+    @GET ("/search?app_id="+ Constants.API_ID+"&app_key="+Constants.API_KEY)
+    Call<Hits> getRecipesFromTo(@Query("q") String query, @Query("from") int from, @Query("to") int to);
 }
