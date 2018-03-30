@@ -12,9 +12,14 @@ import android.widget.TextView;
 
 import com.sanroman.vera.hectorubaldo.searchrecipes.R;
 import com.sanroman.vera.hectorubaldo.searchrecipes.contract.SearchContract;
+import com.sanroman.vera.hectorubaldo.searchrecipes.data.model.Hit;
 import com.sanroman.vera.hectorubaldo.searchrecipes.data.model.Hits;
+import com.sanroman.vera.hectorubaldo.searchrecipes.listener.EndlessScrollListener;
 import com.sanroman.vera.hectorubaldo.searchrecipes.presenter.SearchRecipesPresenter;
 import com.sanroman.vera.hectorubaldo.searchrecipes.view.recyclerView.RVRecipesAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchView extends AppCompatActivity implements SearchContract.View, View.OnClickListener {
 
@@ -23,9 +28,10 @@ public class SearchView extends AppCompatActivity implements SearchContract.View
     private TextView tSearchResult;
     private RecyclerView rv_recipes;
     private RecyclerView.Adapter rvAdapter;
-    private RecyclerView.LayoutManager rvLayoutManager;
+    private GridLayoutManager rvLayoutManager;
+    private EndlessScrollListener scrollListener;
     private SearchContract.Presenter presenter;
-    private int count, to, from;
+    private int count, to, from, start;
     private String data;
     private Hits hits;
 
@@ -51,24 +57,48 @@ public class SearchView extends AppCompatActivity implements SearchContract.View
         this.to = savedInstanceState.getInt("to");
         this.from = savedInstanceState.getInt("from");
         this.data = savedInstanceState.getString("data");
-        presenter.searchRecipes(data,from,to);
+        presenter.searchRecipes(data,start,to);
     }
 
     @Override
     public void showRecipes(Hits hits) {
-        this.hits = hits;
-        data = hits.getQ();
-        count = hits.getCount();
-        to = hits.getTo();
-        from = hits.getFrom();
-        tSearchResult.setText("Search: "+data+" From: "+ from +" To: " +to+" Count: "+count);
+        if (rvLayoutManager != null) {
+            rvLayoutManager = null;
+        }
 
-        //rv_recipes.setHasFixedSize(true);
         rvLayoutManager = new GridLayoutManager(getApplicationContext(), 3);
         rv_recipes.setLayoutManager(rvLayoutManager);
 
-        rvAdapter = new RVRecipesAdapter(hits);
-        rv_recipes.setAdapter(rvAdapter);
+        if (hits.getFrom() == 0) {
+            this.hits = hits;
+            data = hits.getQ();
+            count = hits.getCount();
+            to = hits.getTo();
+            from = hits.getFrom();
+            tSearchResult.setText("Search: " + data + " From: " + from + " To: " + to + " Count: " + count);
+
+            rvAdapter = new RVRecipesAdapter(hits);
+            rv_recipes.setAdapter(rvAdapter);
+        } else {
+            this.data = hits.getQ();
+            this.to = hits.getTo();
+            this.from = hits.getFrom();
+            List<Hit> lHit = this.hits.getHits();
+            lHit.addAll(hits.getHits());
+            this.hits.setHits(lHit);
+            tSearchResult.setText("Search: " + data + " From: " + from + " To: " + to + " Count: " + count);
+
+            rvAdapter.notifyDataSetChanged();
+        }
+        scrollListener = new EndlessScrollListener(rvLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                int newFrom = to +1;
+                int newTo = newFrom + 10;
+                presenter.searchRecipes(data, newFrom, newTo);
+            }
+        };
+        rv_recipes.setOnScrollListener(scrollListener);
     }
 
     @Override
@@ -88,6 +118,7 @@ public class SearchView extends AppCompatActivity implements SearchContract.View
     }
 
     public void setUI() {
+        start = 0;
         count = 0;
         to = 0;
         from = 0;
@@ -98,6 +129,7 @@ public class SearchView extends AppCompatActivity implements SearchContract.View
         bSearchRecipes.setOnClickListener(this);
 
         rv_recipes = (RecyclerView) findViewById(R.id.rv_recipes);
+        rv_recipes.setHasFixedSize(true);
 
         presenter = new SearchRecipesPresenter(this);
     }
