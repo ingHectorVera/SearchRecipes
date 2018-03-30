@@ -32,4 +32,9 @@ public class SearchRecipesPresenter implements SearchContract.Presenter{
             model.searchRecipes(data);
         }
     }
+
+    @Override
+    public void searchRecipes(String data, int from, int to) {
+        model.searchRecipes(data, from, to);
+    }
 }

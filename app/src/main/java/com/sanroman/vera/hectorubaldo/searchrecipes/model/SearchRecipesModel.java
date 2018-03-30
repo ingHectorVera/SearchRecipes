@@ -25,6 +25,12 @@ public class SearchRecipesModel implements SearchContract.Model, ResponseListene
     }
 
     @Override
+    public void searchRecipes(String data, int from, int to) {
+        SearchRecipeAPIModel searchRecipeAPIModel = new SearchRecipeAPIModel(this);
+        searchRecipeAPIModel.searchRecipeFromToCallable(data,from,to);
+    }
+
+    @Override
     public void sendHitsInformation(Hits hits) {
         Log.d("DEBUG: ", "sendHitsInformation: " + hits.toString());
         presenter.showRecipes(hits );

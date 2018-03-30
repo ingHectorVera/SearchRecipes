@@ -42,12 +42,10 @@ public class SearchRecipeAPIModel {
         SearchRecipeFactory.getInstance().getRecipesFromTo(query,from, to).enqueue(new Callback<Hits>() {
             @Override
             public void onResponse(Call<Hits> call, Response<Hits> response) {
-
                 Hits hits = response.body();
-
+                listener.sendHitsInformation(hits);
                 Log.d("DEBUG", "onResponse: "+ response.raw());
                 Log.d("DEBUG", "onResponse: " + hits.toString());
-
             }
 
             @Override
