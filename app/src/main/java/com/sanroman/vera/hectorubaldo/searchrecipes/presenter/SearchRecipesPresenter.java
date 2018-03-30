@@ -3,16 +3,25 @@ package com.sanroman.vera.hectorubaldo.searchrecipes.presenter;
 
 import com.sanroman.vera.hectorubaldo.searchrecipes.contract.SearchContract;
 import com.sanroman.vera.hectorubaldo.searchrecipes.data.model.Hits;
+import com.sanroman.vera.hectorubaldo.searchrecipes.di.DaggerSearchComponent;
 import com.sanroman.vera.hectorubaldo.searchrecipes.model.SearchRecipesModel;
+
+import javax.inject.Inject;
 
 public class SearchRecipesPresenter implements SearchContract.Presenter{
 
     private SearchContract.View view;
-    private SearchContract.Model model;
+
+    @Inject
+    SearchRecipesModel model;
 
     public SearchRecipesPresenter () {
-        model = new SearchRecipesModel();
+        setupDaggerComponent();
         model.attach(this);
+    }
+
+    public void setupDaggerComponent() {
+        DaggerSearchComponent.create().injectModel(this);
     }
 
     @Override

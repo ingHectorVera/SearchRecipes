@@ -41,8 +41,6 @@ public class SearchView extends AppCompatActivity implements SearchContract.View
     @Inject
     SearchRecipesPresenter presenter;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
