@@ -27,6 +27,7 @@ public class SearchView extends AppCompatActivity implements SearchContract.View
     private SearchContract.Presenter presenter;
     private int count, to, from;
     private String data;
+    private Hits hits;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,25 @@ public class SearchView extends AppCompatActivity implements SearchContract.View
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt("to", to);
+        outState.putInt("from", from);
+        outState.putString("data", data);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        this.to = savedInstanceState.getInt("to");
+        this.from = savedInstanceState.getInt("from");
+        this.data = savedInstanceState.getString("data");
+        presenter.searchRecipes(data,from,to);
+    }
+
+    @Override
     public void showRecipes(Hits hits) {
+        this.hits = hits;
         data = hits.getQ();
         count = hits.getCount();
         to = hits.getTo();

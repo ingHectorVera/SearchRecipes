@@ -1,5 +1,8 @@
 package com.sanroman.vera.hectorubaldo.searchrecipes.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 public class Hits {
