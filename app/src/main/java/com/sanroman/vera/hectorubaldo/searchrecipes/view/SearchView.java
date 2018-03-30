@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.sanroman.vera.hectorubaldo.searchrecipes.R;
 import com.sanroman.vera.hectorubaldo.searchrecipes.contract.SearchContract;
+import com.sanroman.vera.hectorubaldo.searchrecipes.data.model.Hits;
 import com.sanroman.vera.hectorubaldo.searchrecipes.presenter.SearchRecipesPresenter;
 
 public class SearchView extends AppCompatActivity implements SearchContract.View, View.OnClickListener {
@@ -27,9 +28,8 @@ public class SearchView extends AppCompatActivity implements SearchContract.View
     }
 
     @Override
-    public void showRecipes(String data) {
-        String temp = tSearchResult.getText().toString();
-        tSearchResult.setText(temp +" "+data);
+    public void showRecipes(Hits hits) {
+        tSearchResult.setText(hits.toString());
     }
 
     @Override

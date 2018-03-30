@@ -1,15 +1,17 @@
 package com.sanroman.vera.hectorubaldo.searchrecipes.contract;
 
 
+import com.sanroman.vera.hectorubaldo.searchrecipes.data.model.Hits;
+
 public interface SearchContract {
 
     interface View {
-        void showRecipes(String data);
+        void showRecipes(Hits hits);
         void showError(String error);
     }
 
     interface Presenter {
-        void showRecipes(String data);
+        void showRecipes(Hits hits);
         void showError(String error);
         void searchRecipes(String data);
     }

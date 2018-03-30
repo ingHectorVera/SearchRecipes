@@ -2,6 +2,7 @@ package com.sanroman.vera.hectorubaldo.searchrecipes.presenter;
 
 
 import com.sanroman.vera.hectorubaldo.searchrecipes.contract.SearchContract;
+import com.sanroman.vera.hectorubaldo.searchrecipes.data.model.Hits;
 import com.sanroman.vera.hectorubaldo.searchrecipes.model.SearchRecipesModel;
 
 public class SearchRecipesPresenter implements SearchContract.Presenter{
@@ -14,9 +15,9 @@ public class SearchRecipesPresenter implements SearchContract.Presenter{
         model = new SearchRecipesModel(this);
     }
     @Override
-    public void showRecipes(String data) {
+    public void showRecipes(Hits hits) {
         if (view != null) {
-            view.showRecipes(data);
+            view.showRecipes(hits);
         }
     }
 
