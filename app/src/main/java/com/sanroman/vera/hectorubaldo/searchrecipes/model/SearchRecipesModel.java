@@ -13,7 +13,12 @@ public class SearchRecipesModel implements SearchContract.Model, ResponseListene
 
     private SearchContract.Presenter presenter;
 
-    public SearchRecipesModel(SearchRecipesPresenter presenter) {
+    public SearchRecipesModel() {
+
+    }
+
+    @Override
+    public void attach(SearchContract.Presenter presenter) {
         this.presenter = presenter;
     }
 

@@ -10,9 +10,15 @@ public class SearchRecipesPresenter implements SearchContract.Presenter{
     private SearchContract.View view;
     private SearchContract.Model model;
 
-    public SearchRecipesPresenter (SearchContract.View view) {
+    public SearchRecipesPresenter () {
+        model = new SearchRecipesModel();
+        model.attach(this);
+    }
+
+    @Override
+    public void attach(SearchContract.View view){
         this.view = view;
-        model = new SearchRecipesModel(this);
+
     }
     @Override
     public void showRecipes(Hits hits) {

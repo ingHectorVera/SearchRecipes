@@ -14,12 +14,15 @@ import com.sanroman.vera.hectorubaldo.searchrecipes.R;
 import com.sanroman.vera.hectorubaldo.searchrecipes.contract.SearchContract;
 import com.sanroman.vera.hectorubaldo.searchrecipes.data.model.Hit;
 import com.sanroman.vera.hectorubaldo.searchrecipes.data.model.Hits;
+import com.sanroman.vera.hectorubaldo.searchrecipes.di.DaggerSearchComponent;
 import com.sanroman.vera.hectorubaldo.searchrecipes.listener.EndlessScrollListener;
 import com.sanroman.vera.hectorubaldo.searchrecipes.presenter.SearchRecipesPresenter;
 import com.sanroman.vera.hectorubaldo.searchrecipes.view.recyclerView.RVRecipesAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 public class SearchView extends AppCompatActivity implements SearchContract.View, View.OnClickListener {
 
@@ -30,19 +33,27 @@ public class SearchView extends AppCompatActivity implements SearchContract.View
     private RecyclerView.Adapter rvAdapter;
     private GridLayoutManager rvLayoutManager;
     private EndlessScrollListener scrollListener;
-    private SearchContract.Presenter presenter;
+    //private SearchContract.Presenter presenter;
     private int count, to, from, start;
     private String data;
     private Hits hits;
+
+    @Inject
+    SearchRecipesPresenter presenter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_view);
-
+        setupDaggerComponent();
         setUI();
     }
 
+    public void setupDaggerComponent(){
+        DaggerSearchComponent.create().inject(this);
+    }
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt("to", to);
@@ -92,6 +103,7 @@ public class SearchView extends AppCompatActivity implements SearchContract.View
         }
         scrollListener = new EndlessScrollListener(rvLayoutManager) {
             @Override
+
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 int newFrom = to +1;
                 int newTo = newFrom + 10;
@@ -131,6 +143,7 @@ public class SearchView extends AppCompatActivity implements SearchContract.View
         rv_recipes = (RecyclerView) findViewById(R.id.rv_recipes);
         rv_recipes.setHasFixedSize(true);
 
-        presenter = new SearchRecipesPresenter(this);
+        //presenter = new SearchRecipesPresenter();
+        presenter.attach(this);
     }
 }
