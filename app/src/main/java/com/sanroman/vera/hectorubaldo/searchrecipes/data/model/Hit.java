@@ -1,6 +1,8 @@
 package com.sanroman.vera.hectorubaldo.searchrecipes.data.model;
 
-public class Hit {
+import java.io.Serializable;
+
+public class Hit implements Serializable{
 
     private Recipe recipe;
     private boolean bookmarked, bought;

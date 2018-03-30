@@ -1,5 +1,6 @@
 package com.sanroman.vera.hectorubaldo.searchrecipes.view.recyclerView;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.sanroman.vera.hectorubaldo.searchrecipes.R;
 import com.sanroman.vera.hectorubaldo.searchrecipes.contract.SearchContract;
 import com.sanroman.vera.hectorubaldo.searchrecipes.data.model.Hit;
 import com.sanroman.vera.hectorubaldo.searchrecipes.data.model.Hits;
+import com.sanroman.vera.hectorubaldo.searchrecipes.view.RecipeDetailsActivity;
 
 import java.util.ArrayList;
 
@@ -59,6 +61,10 @@ public class RVRecipesAdapter extends RecyclerView.Adapter<RVRecipesAdapter.Hits
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
+                    Hit hit = lHits.get(pos);
+                    Intent intent = new Intent(v.getContext(), RecipeDetailsActivity.class);
+                    intent.putExtra("hit", hit);
+                    v.getContext().startActivity(intent);
                     Toast.makeText(v.getContext(), "Position: "+ pos, Toast.LENGTH_SHORT).show();
                 }
             });

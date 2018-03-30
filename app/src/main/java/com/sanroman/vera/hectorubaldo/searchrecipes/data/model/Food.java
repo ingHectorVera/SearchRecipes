@@ -1,6 +1,8 @@
 package com.sanroman.vera.hectorubaldo.searchrecipes.data.model;
 
-public class Food {
+import java.io.Serializable;
+
+public class Food implements Serializable{
 
     private String uri, label;
 

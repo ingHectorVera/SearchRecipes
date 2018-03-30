@@ -1,8 +1,9 @@
 package com.sanroman.vera.hectorubaldo.searchrecipes.data.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Recipe {
+public class Recipe implements Serializable{
 
     private String uri, label, image, source, url;
     private int yield;

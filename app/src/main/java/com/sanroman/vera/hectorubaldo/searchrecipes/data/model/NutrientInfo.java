@@ -1,6 +1,8 @@
 package com.sanroman.vera.hectorubaldo.searchrecipes.data.model;
 
-public class NutrientInfo {
+import java.io.Serializable;
+
+public class NutrientInfo implements Serializable{
 
     private String uri, label, unit;
     private float quantity;

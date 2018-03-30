@@ -1,6 +1,8 @@
 package com.sanroman.vera.hectorubaldo.searchrecipes.data.model;
 
-public class Measure {
+import java.io.Serializable;
+
+public class Measure implements Serializable{
 
     private String uri, label;
 
